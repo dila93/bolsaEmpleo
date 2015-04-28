@@ -8,8 +8,8 @@ from django.contrib.auth.decorators import login_required
 import json
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from Appi.forms import RegistroForm
-from Appi.models import Usuario
+from empleoApp.forms import RegistroForm
+from empleoApp.models import Usuario
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 import smtplib
@@ -76,7 +76,7 @@ def cambiarEstadoUsuario(request):
 
                 print 'por aca llego la baina'
                 print cliente.usuario.username
-                send_mail('Estado de su cuenta en bolsaEmpleo.com','actualmente su cuenta se encuentra en estado: '+estado, 'bolsaempleo28gmail.com', [cliente.usuario.username], fail_silently=False)                       
+                send_mail('Estado de su cuenta en bolsaEmpleo.com','actualmente su cuenta se encuentra en estado: '+estado, 'sebas.dila@gmail.com', [cliente.usuario.username], fail_silently=False)
                 return HttpResponse(json.dumps(response_data), content_type="application/json")
                        
 
