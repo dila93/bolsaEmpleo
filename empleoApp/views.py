@@ -113,7 +113,7 @@ def borrarUsuario(request,Id):
                 form = RegistroForm(request.POST, instance=persona)
                 response_data = {}
                 if form.is_valid():
-                        print "paseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+                        print "pasa"
                         informacion = form.save(commit=False)
                         informacion.usuario.is_active =False
                         informacion.usuario.save()
