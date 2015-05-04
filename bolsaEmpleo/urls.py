@@ -27,4 +27,4 @@ urlpatterns = patterns('',
     url(r'^Borrar_Usuario/(?P<Id>\d+)/$','empleoApp.views.borrarUsuario', name='BorrarUsuario'),    
     
 
-) + static(settings.MEDIA_URL) + static(document_root=settings.MEDIA_ROOT)
+) #+ static(settings.MEDIA_URL) + static(document_root=settings.MEDIA_ROOT)
