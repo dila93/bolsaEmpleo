@@ -12,10 +12,10 @@ class Usuario(models.Model):
 	apellidos = models.CharField(max_length=20, null=True, blank=True)
 	fecha_nacimiento = models.CharField(max_length=20, null=True, blank=True)
 
-	estado= models.CharField(max_length=30, default='En espera') 
-	perfil= models.CharField(max_length=30, default='Indefinido') 
+	estado= models.CharField(max_length=30, default='En espera')
+	perfil= models.CharField(max_length=30, default='Indefinido')
 	activo = models.BooleanField(default=True)		#activo o inactivo
 	fecha_registro = models.DateTimeField(auto_now=True)	#fecha de registro
 
-	def __unicode__(self):	
+	def __unicode__(self):
 		return self.numero

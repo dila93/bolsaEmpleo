@@ -9,22 +9,22 @@ urlpatterns = patterns('',
     # url(r'^$', 'bolaEmpleo.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^be/', include(admin.site.urls)),
     url(r'^$', 'bolsaEmpleo.views.inicio', name='inicio'),
-    url(r'^login/$', 'bolsaEmpleo.views.iniciarSesion', name='login'),
-    url(r'^registro/$', 'bolsaEmpleo.views.registro', name='registro'),
-    url(r'^logout/$', 'bolsaEmpleo.views.cerrarSesion', name='logout'),
-    url(r'^recuperar_contrasena/$', 'bolsaEmpleo.views.recuperarContrasena', name='recuperarContrasena'),
-    url(r'^cambiar_pass/$', 'bolsaEmpleo.views.cambiarPass', name='cambiarPassword'),
+    url(r'^login/$', 'bolsaEmpleo.views.iniciar_sesion', name='iniciar_sesion'),
+    url(r'^registro/$', 'bolsaEmpleo.views.Registro', name='Registro'),
+    url(r'^logout/$', 'bolsaEmpleo.views.cerrar_sesion', name='cerrar_sesion'),
+    url(r'^recuperar_contrasena/$', 'bolsaEmpleo.views.Recuperar_contrasena', name='Recuperar_contrasena'),
+    url(r'^cambiar_pass/$', 'bolsaEmpleo.views.Cambiar_pass', name='Cambiar_pass'),
 
-    url(r'^principal/$', 'empleoApp.views.principal', name='principal'),
-    url(r'^listar_solicitudes/$', 'empleoApp.views.listarSolicitudes', name='ListarSolicitudes'),
-    url(r'^cambiar_estado_usuario/$', 'empleoApp.views.cambiarEstadoUsuario', name='CambiarEstadoUsuario'),
+    url(r'^principal/$', 'empleoApp.views.Principal', name='Principal'),
+    url(r'^listar_solicitudes/$', 'empleoApp.views.Listar_solicitudes', name='Listar_solicitudes'),
+    url(r'^cambiar_estado_usuario/$', 'empleoApp.views.Cambiar_estado_usuario', name='Cambiar_estado_usuario'),
 
      #--------------------------------------------------------------------------------------------------------------------------------
-    url(r'^Listar_Usuarios/$', 'empleoApp.views.listarUsuarios', name='ListarUsuarios'),
-    url(r'^Editar_Usuario/(?P<Id>\d+)/$','empleoApp.views.editarUsuario', name='EditUsuario'),
-    url(r'^Borrar_Usuario/(?P<Id>\d+)/$','empleoApp.views.borrarUsuario', name='BorrarUsuario'),    
-    
+    url(r'^Listar_Usuarios/$', 'empleoApp.views.Listar_Usuarios', name='Listar_Usuarios'),
+    url(r'^Editar_Usuario/(?P<Id>\d+)/$','empleoApp.views.Editar_Usuario', name='Editar_Usuario'),
+    url(r'^Borrar_Usuario/(?P<Id>\d+)/$','empleoApp.views.Borrar_Usuario', name='Borrar_Usuario'),
+
 
 ) #+ static(settings.MEDIA_URL) + static(document_root=settings.MEDIA_ROOT)

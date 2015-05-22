@@ -1,16 +1,16 @@
 from empleoApp.models import Usuario
 from django.contrib import admin
-
+from django.contrib.admin import ModelAdmin
+from django.contrib.auth.models import User
 # Register your models here.
 
-class editarInfo(admin.ModelAdmin):
-    fieldsets = [
-        (None,               {'fields': ['usuario']}),
-        (None,               {'fields': ['tipo_user']}),
-        (None,               {'fields': ['nombres']}),
-        (None,               {'fields': ['apellidos']}),
-    ]
+class ArticleAdmin(admin.ModelAdmin):
+    class Media:
+        css = {
+            "all": ("/my_styles.css",)
+        }
+        js = ("my_code.js",)
 
-    list_display = ('usuario', 'tipo_user','nombres','apellidos')
 
-admin.site.register(Usuario, editarInfo)
+
+admin.site.register(Usuario,ArticleAdmin)

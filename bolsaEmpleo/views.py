@@ -1,8 +1,9 @@
 # -*- coding: cp1252 -*-
 from django.shortcuts import render_to_response, redirect,render,get_object_or_404
+
 from django.template import RequestContext
 from django.http import HttpResponseRedirect,HttpResponse
-
+from django.contrib.auth import login as auth_login , logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
@@ -10,36 +11,33 @@ from empleoApp.forms import *
 import json
 from django.core.mail import send_mail
 import string
+from pprint import pprint
 
 def iniciar_sesion(request):
-	if not request.user.is_anonymous():	#verifico que no sea anonimo
-		return HttpResponseRedirect('/principal/')
 	if request.method == 'POST':
-		formulario = AuthenticationForm(request.POST)
-		if formulario.is_valid:
-			username = request.POST['username']
-			clave = request.POST['password']
-			acceso = authenticate(username = username, password = clave)
-			if acceso is not None:
-				if acceso.is_active:
-					#request.session.set_expiry(60)	# 1 min
-					login(request, acceso)
-					#message="bien hecho tio"
-					#return render_to_response('usuarios/login.html',{'message':message},context_instance=RequestContext(request))
-					return redirect('principal')
-				else:
-					return render_to_response('usuario/login.html',{'message':'aun no estas activo'},context_instance=RequestContext(request))
-			else:
-				#return HttpResponseRedirect('/index')
-				return render_to_response('usuario/login.html',{'message':'no eres usuario'},context_instance=RequestContext(request))
+		username = request.POST.get('username')
+		clave = request.POST.get('password')
+		print clave
+		acceso = authenticate(username = username, password = clave)
+		print acceso
+		if acceso is not None:
+			if acceso.is_active:
+				auth_login(request,acceso)
+			#request.session.set_expiry(60)	# 1 min
+			login(request, acceso)
+			#message="bien hecho tio"
+			#return render_to_response('usuarios/login.html' ,{'message':message} , context_instance=RequestContext(request))
+			return HttpResponseRedirect("/principal")
+		else:
+			#return HttpResponseRedirect('/index')
+			return render_to_response('usuario/index.html',{'message':'no eres usuario'},context_instance=RequestContext(request))
 	else:
-		formulario = AuthenticationForm()
-
-	return render_to_response('usuario/login.html',{'formulario':formulario},context_instance=RequestContext(request))
+		return render_to_response('usuario/index.html',{'formulario':formulario},context_instance=RequestContext(request))
 
 
 
 def inicio(request):
+	formulario = AuthenticationForm()
 	return render_to_response('usuario/index.html',context_instance=RequestContext(request))
 
 def Registro(request):	                                # pagina de inicio
@@ -134,6 +132,3 @@ def cerrar_sesion(request):
 	logout(request)
 	print request
 	return redirect('inicio')
-
-
-
