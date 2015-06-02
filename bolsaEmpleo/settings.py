@@ -92,7 +92,7 @@ TEMPLATE_DIRS = (os.path.join(BASE_DIR,'templates'),)      #se anade direccion d
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-MEDIA_URL = ''
+MEDIA_URL = 'static/'
 #MEDIA_URL = '/media/'
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

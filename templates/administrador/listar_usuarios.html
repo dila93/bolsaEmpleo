@@ -1,0 +1,63 @@
+{% extends 'usuario/index.html' %}
+
+
+
+{% block cabecera %}
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading"><font color="#f5deb3">Bolsa de Empleo</font></h1>
+                        <p class="intro-text">
+                            <font color="white">
+                                LISTA DE USUARIOS
+                            </font>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{%  endblock %}
+
+
+
+{% block contenido %}
+    <table style="margin: -180px auto 0;">
+        <thead>
+        <tr>
+            <td>Codigo</td>
+            <td>Nombres</td>
+            <td>Apellidos</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% if usuarios %}
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>
+                        {{ usuario.numero_user }}
+                    </td>
+                    <td>
+                        {{ usuario.nombres }}
+                    </td>
+                    <td>
+                        {{ usuario.apellidos }}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>
+                    <p>
+                        No se a podido cargar la informacion de ningun usuario
+                    </p>
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

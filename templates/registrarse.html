@@ -1,9 +1,4 @@
-{%  extends 'usuario/index.html' %}
-
-
-
-
-
+{% extends 'usuario/principal.html' %}
 
 {% block cabecera %}
     <!-- Intro Header -->
@@ -15,7 +10,7 @@
                         <h1 class="brand-heading"><font color="#f5deb3">Bolsa de Empleo</font></h1>
                         <p class="intro-text">
                             <font color="white">
-                                Bienvenido, en este momento se encuentra logueado
+                                Porfavor suministrenos su informacion para completar su registro.
                             </font>
                         </p>
 
@@ -29,19 +24,14 @@
 
 
 {% block contenido %}
-    <div style="margin-top: -180px">
-        <ul class="list-inline">
-            <li>
-                <a href="/">
-                    Editar cuenta
-                </a>
-            </li>
-            <li>
-                <a href="/Listar_Usuarios/">
-                    Listar Usuarios
-                </a>
-            </li>
-        </ul>
-    </div>
-
+    <style>
+        form input{
+            color: #080808;
+        }
+    </style>
+    <form method="post"  action="/registro/">
+        {% csrf_token %}
+        {{ formulario.as_p }}
+        <input class="btn-default" type="submit" value="Registrarse">
+    </form>
 {% endblock %}

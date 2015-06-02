@@ -10,19 +10,19 @@
     <meta name="author" content="">
 
     <title>Grayscale - Start Bootstrap Theme</title>
+    {% block main_css %}
+        <!-- Bootstrap Core CSS -->
+        <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="{% static 'assets/css/grayscale.css' %}" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="{% static 'assets/css/grayscale.css' %}" rel="stylesheet">
+        <!-- Custom Fonts -->
+        <link href="{% static 'assets/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
-    <!-- Custom Fonts -->
-    <link href="{% static 'assets/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-
-
+    {% endblock %}
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -34,21 +34,28 @@
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">
-                    <i class="fa fa-play-circle"></i>  <span class="light">Inicio</span>
-                </a>
-            </div>
+<!-- Navigation -->
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="/">
+                <i class="fa fa-play-circle"></i>  <span class="light">Inicio</span>
+            </a>
+        </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-                <ul class="nav navbar-nav">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+
+            <ul class="nav navbar-nav">
+                {%  if user.is_authenticated %}
+                     <li>
+                        <a class="page-scroll" href="/logout/" style="color: #fff">Cerrar sesion</a>
+                    </li>
+                {% else %}
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
                         <a href="#page-top"></a>
@@ -62,20 +69,22 @@
                     <li>
                         <a class="page-scroll" href="#contact" style="color: #fff">Contacto</a>
                     </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+                {% endif %}
+            </ul>
         </div>
-        <!-- /.container -->
-    </nav>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
 
+{% block cabecera %}
     <!-- Intro Header -->
     <header class="intro">
         <div class="intro-body">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                         <h1 class="brand-heading"><font color="#f5deb3">Bolsa de Empleo</font></h1>
+                        <h1 class="brand-heading"><font color="#f5deb3">Bolsa de Empleo</font></h1>
                         <p class="intro-text"><font color="white">Bienvenido a la bolsa de empleo para egresados.</font></p>
                         <a href="#login" class="btn btn-circle page-scroll">
                             <i class="fa fa-angle-double-down animated"></i>
@@ -85,44 +94,46 @@
             </div>
         </div>
     </header>
+{%  endblock %}
 
-    <!-- login Section -->
-    <!-- <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
-    <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script> -->
+<!-- login Section -->
+<!-- <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script> -->
+{% block contenido %}
 
     <section id="login" class="container content-section text-center">
         <div class="{% static 'assets/css/colorgraph.css' %}">
-        <div class="row" style="margin-top:20px">
-            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-                <form  action="{% url 'iniciar_sesion' %}" method="POST" role="form">
-                    {% csrf_token %}
-                    <fieldset>
-                        <h2>Por favor inicia sesion</h2>
-                        <hr class="{% static 'assets/css/colorgraph.css' %}">
-                        <div class="form-group">
-                            <input type="test" name="username" id="email" class="form-control " placeholder="Correo Electronico">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="password" id="password" class="form-control " placeholder="Constrasena">
-                        </div>
+            <div class="row" style="margin-top:20px">
+                <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                    <form  action="{% url 'iniciar_sesion' %}" method="POST" role="form">
+                        {% csrf_token %}
+                        <fieldset>
+                            <h2>Por favor inicia sesion</h2>
+                            <hr class="{% static 'assets/css/colorgraph.css' %}">
+                            <div class="form-group">
+                                <input type="test" name="username" id="email" class="form-control " placeholder="Correo Electronico">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" id="password" class="form-control " placeholder="Constrasena">
+                            </div>
                         <span class="button-checkbox">
                             <button type="button" class="btn" data-color="info">Recordarme</button>
                             <input type="checkbox" name="remember_me" id="remember_me" checked="checked" class="hidden">
                             <a href="" class="btn btn-link pull-right">Olvidaste tu contrasena?</a>
                         </span>
-                        <hr class="{% static 'assets/css/colorgraph.css' %}">
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-6 col-md-6">
-                                <input type="submit" class="btn btn-lg btn-success btn-block" value="Sign In">
+                            <hr class="{% static 'assets/css/colorgraph.css' %}">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <input type="submit" class="btn btn-lg btn-success btn-block" value="Sign In">
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <a href="" class="btn btn-lg btn-primary btn-block">Register</a>
+                                </div>
                             </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6">
-                                <a href="" class="btn btn-lg btn-primary btn-block">Register</a>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
+                        </fieldset>
+                    </form>
+                </div>
             </div>
-        </div>
         </div>
         <script src="{% static 'assets/js/checkbox' %}" rel="stylesheet"></script>
     </section>
@@ -166,13 +177,15 @@
     <!-- Map Section -->
     <div id="map"></div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container text-center">
-            <p>Copyright &copy; Your Website 2014</p>
-        </div>
-    </footer>
+{% endblock %}
+<!-- Footer -->
+<footer>
+    <div class="container text-center">
+        <p>Copyright &copy; Bolsa de empleo 2015</p>
+    </div>
+</footer>
 
+{% block main_scripts %}
     <!-- jQuery -->
     <script src="{% static 'assets/js/jquery.js' %}"></script>
 
@@ -188,13 +201,15 @@
     <!-- Custom Theme JavaScript -->
     <script src="{% static 'assets/js/grayscale.js' %}"></script>
 
-    <script>
+{% endblock %}
+
+<script>
     var msj = "{{message}}";
     if (msj != "")
-        {
-            alert(msj);
-        }
-    </script>
+    {
+        alert(msj);
+    }
+</script>
 </body>
 
 </html>

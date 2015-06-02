@@ -3,6 +3,6 @@ from empleoApp.models import Usuario
 
 
 class RegistroForm(forms.ModelForm):
-	class Meta:
-		model = Usuario
-		exclude = ['usuario','activo','estado','perfil']
+    class Meta:
+        model = Usuario
+        exclude = ['usuario', 'activo', 'estado', 'perfil']
